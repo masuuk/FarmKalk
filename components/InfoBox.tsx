@@ -5,9 +5,10 @@ interface InfoBoxProps {
     title: string;
     children: React.ReactNode;
     variant: 'warning' | 'info';
+    onClose?: () => void;
 }
 
-const InfoBox: React.FC<InfoBoxProps> = ({ title, children, variant }) => {
+const InfoBox: React.FC<InfoBoxProps> = ({ title, children, variant, onClose }) => {
     const variantClasses = {
         warning: {
             bg: "bg-yellow-100/50",
@@ -28,14 +29,23 @@ const InfoBox: React.FC<InfoBoxProps> = ({ title, children, variant }) => {
     const currentVariant = variantClasses[variant];
 
     return (
-        <div className={`p-3 rounded-lg mt-4 text-xs ${currentVariant.bg} ${currentVariant.text}`} role="alert">
+        <div className={`p-3 rounded-lg mt-4 text-xs ${currentVariant.bg} ${currentVariant.text} relative`} role="alert">
             <h3 className={`font-semibold mb-1 flex items-center gap-1.5 ${currentVariant.icon ? '' : 'justify-center'}`}>
                 {currentVariant.icon}
                 {title}
             </h3>
-            <div className="opacity-90">
+            <div className="opacity-90 pr-5">
                 {children}
             </div>
+            {onClose && (
+                <button
+                    onClick={onClose}
+                    className="absolute top-2 right-2 p-1 rounded-full hover:bg-black/10 transition-colors"
+                    aria-label="Close message"
+                >
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            )}
         </div>
     );
 };

@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Currency, FarmType } from '../types';
+import { Currency } from '../types';
 import InfoBox from './InfoBox';
 
 interface ConfigurationPanelProps {
@@ -10,8 +10,6 @@ interface ConfigurationPanelProps {
     setCurrency: (value: Currency) => void;
     exchangeRate: number;
     setExchangeRate: (value: number) => void;
-    farmTypes: FarmType[];
-    onUpdateFarmUnitValues: (farmName: string, newValues: { costUnit?: number; revUnit?: number }) => void;
 }
 
 const ConfigurationPanel: React.FC<ConfigurationPanelProps> = ({
@@ -21,12 +19,8 @@ const ConfigurationPanel: React.FC<ConfigurationPanelProps> = ({
     setCurrency,
     exchangeRate,
     setExchangeRate,
-    farmTypes,
-    onUpdateFarmUnitValues
 }) => {
-    const [isAdjustmentsOpen, setIsAdjustmentsOpen] = useState(false);
-    const broilerData = farmTypes.find(f => f.name === 'Broilers');
-    const rabbitData = farmTypes.find(f => f.name === 'Rabbit');
+    const [isInfoBoxVisible, setIsInfoBoxVisible] = useState(true);
 
     return (
         <div className="bg-white p-5 rounded-xl shadow-lg h-full border border-gray-200/80">
@@ -88,52 +82,15 @@ const ConfigurationPanel: React.FC<ConfigurationPanelProps> = ({
                     </div>
                 )}
                 
-                <div className="border-t border-gray-200">
-                    <button
-                        onClick={() => setIsAdjustmentsOpen(!isAdjustmentsOpen)}
-                        className="flex justify-between items-center w-full py-3 text-left font-semibold text-gray-700 hover:bg-gray-50 rounded-md px-2"
+                {isInfoBoxVisible && (
+                    <InfoBox
+                        title="Currency Conversion"
+                        variant="warning"
+                        onClose={() => setIsInfoBoxVisible(false)}
                     >
-                        <span>Quick Adjustments</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" className={`h-5 w-5 transition-transform duration-300 ${isAdjustmentsOpen ? 'rotate-180' : ''}`} viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                        </svg>
-                    </button>
-                    {isAdjustmentsOpen && (
-                        <div className="px-2 pb-2 space-y-3 bg-gray-50/70 rounded-b-md">
-                             {broilerData && (
-                                 <div className="grid grid-cols-2 gap-3">
-                                     <div>
-                                         <label htmlFor="broilerCost" className="block text-xs font-medium text-gray-500">🐔 Broiler Cost</label>
-                                         <input type="number" id="broilerCost" value={broilerData.costUnit} onChange={(e) => onUpdateFarmUnitValues('Broilers', { costUnit: Number(e.target.value) })} className="w-full p-2 border border-gray-300 rounded-md mt-1 text-sm" />
-                                     </div>
-                                      <div>
-                                         <label htmlFor="broilerPrice" className="block text-xs font-medium text-gray-500">🐔 Broiler Price</label>
-                                         <input type="number" id="broilerPrice" value={broilerData.revUnit} onChange={(e) => onUpdateFarmUnitValues('Broilers', { revUnit: Number(e.target.value) })} className="w-full p-2 border border-gray-300 rounded-md mt-1 text-sm" />
-                                     </div>
-                                 </div>
-                             )}
-                             {rabbitData && (
-                                 <div className="grid grid-cols-2 gap-3">
-                                     <div>
-                                         <label htmlFor="rabbitCost" className="block text-xs font-medium text-gray-500">🐰 Rabbit Cost</label>
-                                         <input type="number" id="rabbitCost" value={rabbitData.costUnit} onChange={(e) => onUpdateFarmUnitValues('Rabbit', { costUnit: Number(e.target.value) })} className="w-full p-2 border border-gray-300 rounded-md mt-1 text-sm" />
-                                     </div>
-                                      <div>
-                                         <label htmlFor="rabbitPrice" className="block text-xs font-medium text-gray-500">🐰 Rabbit Price</label>
-                                         <input type="number" id="rabbitPrice" value={rabbitData.revUnit} onChange={(e) => onUpdateFarmUnitValues('Rabbit', { revUnit: Number(e.target.value) })} className="w-full p-2 border border-gray-300 rounded-md mt-1 text-sm" />
-                                     </div>
-                                 </div>
-                             )}
-                        </div>
-                    )}
-                </div>
-
-                 <InfoBox
-                    title="Currency Conversion"
-                    variant="warning"
-                >
-                    <p>All values are based in ZAR. When USD is selected, they are converted using your provided exchange rate.</p>
-                </InfoBox>
+                        <p>All values are based in ZAR. When USD is selected, they are converted using your provided exchange rate.</p>
+                    </InfoBox>
+                )}
             </div>
         </div>
     );

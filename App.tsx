@@ -17,14 +17,6 @@ const App: React.FC = () => {
         setFarmTypes(newFarmTypes);
     };
 
-    const handleUpdateFarmUnitValues = (farmName: string, newValues: { costUnit?: number; revUnit?: number }) => {
-        setFarmTypes(prevFarmTypes => 
-            prevFarmTypes.map(farm => 
-                farm.name === farmName ? { ...farm, ...newValues } : farm
-            )
-        );
-    };
-
     const formatCurrency = useCallback((value: number) => {
         const convertedValue = currency === 'USD' ? value / exchangeRate : value;
         const options = {
@@ -84,11 +76,11 @@ const App: React.FC = () => {
     return (
         <div className="bg-green-50/50 min-h-screen text-gray-800 p-4 font-sans">
             <div className="max-w-7xl mx-auto">
-                <header className="text-center mb-8">
-                    <h1 className="text-4xl font-bold text-green-800">
+                <header className="text-center mb-8 p-6 bg-green-700 rounded-xl shadow-md">
+                    <h1 className="text-4xl font-bold text-white">
                         🚜 Farm Profitability Calculator
                     </h1>
-                    <p className="text-green-600 mt-1">
+                    <p className="text-green-200 mt-1">
                         Instantly analyze costs, revenue, and profit for your farm.
                     </p>
                 </header>
@@ -102,8 +94,6 @@ const App: React.FC = () => {
                             setCurrency={setCurrency}
                             exchangeRate={exchangeRate}
                             setExchangeRate={setExchangeRate}
-                            farmTypes={farmTypes}
-                            onUpdateFarmUnitValues={handleUpdateFarmUnitValues}
                         />
                     </div>
                     <div className="lg:col-span-3">
