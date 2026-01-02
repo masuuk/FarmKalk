@@ -85,8 +85,8 @@ const App: React.FC = () => {
                     </p>
                 </header>
 
-                <main className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-                    <div className="lg:col-span-2">
+                <main className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div className="lg:col-span-1">
                         <ConfigurationPanel
                             totalArea={totalArea}
                             setTotalArea={setTotalArea}
@@ -96,7 +96,7 @@ const App: React.FC = () => {
                             setExchangeRate={setExchangeRate}
                         />
                     </div>
-                    <div className="lg:col-span-3">
+                    <div className="lg:col-span-2">
                         <ResultsPanel
                             farmTypes={farmTypes}
                             onUpdateFarmType={handleUpdateFarmType}
