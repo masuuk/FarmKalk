@@ -10,6 +10,11 @@ interface ProfitChartProps {
 const ProfitChart: React.FC<ProfitChartProps> = ({ results, formatCurrency }) => {
     const profitableFarms = results.filter(r => r.profit > 0 && r.name !== "Utilities & road");
     const maxProfit = Math.max(...profitableFarms.map(r => r.profit), 0);
+
+    // Sort farms by profit to identify tallest and shortest bars
+    const sortedFarms = [...profitableFarms].sort((a, b) => b.profit - a.profit);
+    const tallestNames = new Set(sortedFarms.slice(0, 3).map(f => f.name));
+    const shortestNames = new Set(sortedFarms.slice(-3).map(f => f.name));
     
     if (maxProfit === 0) {
         return (
@@ -25,10 +30,18 @@ const ProfitChart: React.FC<ProfitChartProps> = ({ results, formatCurrency }) =>
             <div className="w-full h-48 flex items-end justify-around gap-2 px-2">
                 {profitableFarms.map((item) => {
                     const barHeight = (item.profit / maxProfit) * 100;
+                    
+                    let barColorClasses = "bg-green-200 hover:bg-green-400"; // Default
+                    if (tallestNames.has(item.name)) {
+                        barColorClasses = "bg-yellow-400 hover:bg-yellow-500"; // Gold for tallest
+                    } else if (shortestNames.has(item.name)) {
+                        barColorClasses = "bg-red-300 hover:bg-red-400"; // Red for shortest
+                    }
+
                     return (
                         <div key={item.name} className="flex-1 flex flex-col items-center h-full justify-end group">
                             <div
-                                className="w-full bg-green-200 hover:bg-green-400 rounded-t-md transition-all duration-300 ease-in-out cursor-pointer relative"
+                                className={`w-full ${barColorClasses} rounded-t-md transition-all duration-300 ease-in-out cursor-pointer relative`}
                                 style={{ height: `${barHeight}%` }}
                                 title={`${item.name}: ${formatCurrency(item.profit)}`}
                             >
