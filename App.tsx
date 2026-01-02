@@ -9,6 +9,21 @@ const App: React.FC = () => {
     const [totalArea, setTotalArea] = useState<number>(10000);
     const [currency, setCurrency] = useState<Currency>('ZAR');
     const [exchangeRate, setExchangeRate] = useState<number>(17.50);
+    const [farmTypes, setFarmTypes] = useState<FarmType[]>(FARM_TYPES);
+
+    const handleUpdateFarmType = (index: number, updatedFarm: FarmType) => {
+        const newFarmTypes = [...farmTypes];
+        newFarmTypes[index] = updatedFarm;
+        setFarmTypes(newFarmTypes);
+    };
+
+    const handleUpdateFarmUnitValues = (farmName: string, newValues: { costUnit?: number; revUnit?: number }) => {
+        setFarmTypes(prevFarmTypes => 
+            prevFarmTypes.map(farm => 
+                farm.name === farmName ? { ...farm, ...newValues } : farm
+            )
+        );
+    };
 
     const formatCurrency = useCallback((value: number) => {
         const convertedValue = currency === 'USD' ? value / exchangeRate : value;
@@ -27,7 +42,7 @@ const App: React.FC = () => {
         let totalRevenue = 0;
         let totalAllocatedArea = 0;
 
-        const calculatedResults: CalculationResult[] = FARM_TYPES.map((farm: FarmType) => {
+        const calculatedResults: CalculationResult[] = farmTypes.map((farm: FarmType) => {
             const area = (farm.pct / 100) * totalArea;
             totalAllocatedArea += area;
             const quantity = farm.name !== "Utilities & road" ? Math.round(farm.yield * area * farm.cycles) : 0;
@@ -62,7 +77,7 @@ const App: React.FC = () => {
         };
 
         return { results: calculatedResults, totals: calculatedTotals };
-    }, [totalArea]);
+    }, [totalArea, farmTypes]);
 
 
     return (
@@ -89,10 +104,14 @@ const App: React.FC = () => {
                             setCurrency={setCurrency}
                             exchangeRate={exchangeRate}
                             setExchangeRate={setExchangeRate}
+                            farmTypes={farmTypes}
+                            onUpdateFarmUnitValues={handleUpdateFarmUnitValues}
                         />
                     </div>
                     <div className="lg:col-span-2">
                         <ResultsPanel
+                            farmTypes={farmTypes}
+                            onUpdateFarmType={handleUpdateFarmType}
                             results={results}
                             totals={totals}
                             formatCurrency={formatCurrency}

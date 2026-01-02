@@ -1,19 +1,25 @@
 
 import React from 'react';
-import { CalculationResult, Totals } from '../types';
+import { CalculationResult, Totals, FarmType } from '../types';
 import StatCard from './StatCard';
 import ResultsTable from './ResultsTable';
 import InfoBox from './InfoBox';
-import { FARM_TYPES } from '../constants';
 
-
-const ResultsPanel: React.FC<{ results: CalculationResult[]; totals: Totals; formatCurrency: (value: number) => string }> = ({
+const ResultsPanel: React.FC<{
+    results: CalculationResult[];
+    totals: Totals;
+    formatCurrency: (value: number) => string;
+    farmTypes: FarmType[];
+    onUpdateFarmType: (index: number, updatedFarm: FarmType) => void;
+}> = ({
     results,
     totals,
-    formatCurrency
+    formatCurrency,
+    farmTypes,
+    onUpdateFarmType
 }) => {
 
-    const cycleInfoString = FARM_TYPES.filter(f => f.name !== 'Utilities & road').map(f => `${f.name}: ${f.cycles}`).join(' | ');
+    const cycleInfoString = farmTypes.filter(f => f.name !== 'Utilities & road').map(f => `${f.name}: ${f.cycles}`).join(' | ');
 
     return (
         <div className="bg-white p-6 rounded-xl shadow-lg">
@@ -32,7 +38,13 @@ const ResultsPanel: React.FC<{ results: CalculationResult[]; totals: Totals; for
                 <StatCard label="Profit Margin" value={`${totals.profitMargin.toFixed(1)}%`} isHighlighted />
             </div>
 
-            <ResultsTable results={results} totals={totals} formatCurrency={formatCurrency} />
+            <ResultsTable
+                results={results}
+                totals={totals}
+                formatCurrency={formatCurrency}
+                farmTypes={farmTypes}
+                onUpdateFarmType={onUpdateFarmType}
+            />
 
             <InfoBox 
                 title="Annual Production Cycles"

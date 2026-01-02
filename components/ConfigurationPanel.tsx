@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Currency } from '../types';
+import { Currency, FarmType } from '../types';
 import InfoBox from './InfoBox';
 
 interface ConfigurationPanelProps {
@@ -10,6 +10,8 @@ interface ConfigurationPanelProps {
     setCurrency: (value: Currency) => void;
     exchangeRate: number;
     setExchangeRate: (value: number) => void;
+    farmTypes: FarmType[];
+    onUpdateFarmUnitValues: (farmName: string, newValues: { costUnit?: number; revUnit?: number }) => void;
 }
 
 const ConfigurationPanel: React.FC<ConfigurationPanelProps> = ({
@@ -18,8 +20,13 @@ const ConfigurationPanel: React.FC<ConfigurationPanelProps> = ({
     currency,
     setCurrency,
     exchangeRate,
-    setExchangeRate
+    setExchangeRate,
+    farmTypes,
+    onUpdateFarmUnitValues
 }) => {
+    const broilerData = farmTypes.find(f => f.name === 'Broilers');
+    const rabbitData = farmTypes.find(f => f.name === 'Rabbit');
+
     return (
         <div className="bg-white p-6 rounded-xl shadow-lg h-full">
             <h2 className="text-xl font-bold text-green-700 border-b pb-3 mb-4 flex items-center gap-2">
@@ -69,6 +76,35 @@ const ConfigurationPanel: React.FC<ConfigurationPanelProps> = ({
                         />
                     </div>
                 )}
+                
+                <div className="border-t pt-6 space-y-4">
+                     <h3 className="text-lg font-semibold text-gray-600">Quick Adjustments</h3>
+                     {broilerData && (
+                         <div className="grid grid-cols-2 gap-4">
+                             <div>
+                                 <label htmlFor="broilerCost" className="block text-xs font-medium text-gray-600">Broiler Cost ({broilerData.unit})</label>
+                                 <input type="number" id="broilerCost" value={broilerData.costUnit} onChange={(e) => onUpdateFarmUnitValues('Broilers', { costUnit: Number(e.target.value) })} className="w-full p-2 border border-gray-300 rounded-md mt-1" />
+                             </div>
+                              <div>
+                                 <label htmlFor="broilerPrice" className="block text-xs font-medium text-gray-600">Broiler Price ({broilerData.unit})</label>
+                                 <input type="number" id="broilerPrice" value={broilerData.revUnit} onChange={(e) => onUpdateFarmUnitValues('Broilers', { revUnit: Number(e.target.value) })} className="w-full p-2 border border-gray-300 rounded-md mt-1" />
+                             </div>
+                         </div>
+                     )}
+                     {rabbitData && (
+                         <div className="grid grid-cols-2 gap-4">
+                             <div>
+                                 <label htmlFor="rabbitCost" className="block text-xs font-medium text-gray-600">Rabbit Cost ({rabbitData.unit})</label>
+                                 <input type="number" id="rabbitCost" value={rabbitData.costUnit} onChange={(e) => onUpdateFarmUnitValues('Rabbit', { costUnit: Number(e.target.value) })} className="w-full p-2 border border-gray-300 rounded-md mt-1" />
+                             </div>
+                              <div>
+                                 <label htmlFor="rabbitPrice" className="block text-xs font-medium text-gray-600">Rabbit Price ({rabbitData.unit})</label>
+                                 <input type="number" id="rabbitPrice" value={rabbitData.revUnit} onChange={(e) => onUpdateFarmUnitValues('Rabbit', { revUnit: Number(e.target.value) })} className="w-full p-2 border border-gray-300 rounded-md mt-1" />
+                             </div>
+                         </div>
+                     )}
+                </div>
+
                  <InfoBox
                     title="Currency Conversion"
                     variant="warning"
