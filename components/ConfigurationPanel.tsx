@@ -28,78 +28,80 @@ const ConfigurationPanel: React.FC<ConfigurationPanelProps> = ({
     const rabbitData = farmTypes.find(f => f.name === 'Rabbit');
 
     return (
-        <div className="bg-white p-6 rounded-xl shadow-lg h-full">
-            <h2 className="text-xl font-bold text-green-700 border-b pb-3 mb-4 flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+        <div className="bg-white p-5 rounded-xl shadow-lg h-full border border-gray-200/80">
+            <h2 className="text-lg font-bold text-green-700 pb-3 mb-4 flex items-center gap-2 border-b border-gray-200">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M10 3.5a1.5 1.5 0 013 0V4a1 1 0 001 1h3a1 1 0 011 1v2a1 1 0 01-1 1h-3.5a1.5 1.5 0 00-3 0V15a1 1 0 01-1 1H6a1 1 0 01-1-1v-4.03a3.342 3.342 0 01.9-2.206l2.1-2.625A3.342 3.342 0 0110 3.5z" />
+                  <path d="M10 3.5a1.5 1.5 0 00-3 0V4a1 1 0 01-1 1H3a1 1 0 00-1 1v2a1 1 0 001 1h3.5a1.5 1.5 0 013 0V15a1 1 0 001 1h4a1 1 0 001-1v-4.03a3.342 3.342 0 00-.9-2.206l-2.1-2.625A3.342 3.342 0 0010 3.5z" />
                 </svg>
                 Configuration
             </h2>
-            <div className="space-y-6">
+            <div className="space-y-4">
                 <div>
-                    <label htmlFor="totalArea" className="block text-sm font-medium text-gray-700 mb-1">Total Farm Area (m²)</label>
+                    <label htmlFor="totalArea" className="block text-sm font-medium text-gray-600 mb-1">Total Farm Area (m²)</label>
                     <input
                         type="number"
                         id="totalArea"
                         value={totalArea}
                         onChange={(e) => setTotalArea(Number(e.target.value))}
                         min="100"
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-shadow"
+                        className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-green-500 focus:border-green-500 transition-shadow text-sm"
                     />
                 </div>
 
-                <div>
-                    <label htmlFor="currency" className="block text-sm font-medium text-gray-700 mb-1">Currency</label>
-                    <select
-                        id="currency"
-                        value={currency}
-                        onChange={(e) => setCurrency(e.target.value as Currency)}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-shadow bg-white"
-                    >
-                        <option value="ZAR">South African Rand (R)</option>
-                        <option value="USD">US Dollar ($)</option>
-                    </select>
-                    <p className="text-xs text-gray-500 mt-1 italic">Select USD to enable exchange rate.</p>
-                </div>
-
-                {currency === 'USD' && (
-                    <div className="transition-all duration-300 ease-in-out">
-                        <label htmlFor="exchangeRate" className="block text-sm font-medium text-gray-700 mb-1">USD to ZAR Rate</label>
-                        <input
-                            type="number"
-                            id="exchangeRate"
-                            value={exchangeRate}
-                            onChange={(e) => setExchangeRate(Number(e.target.value))}
-                            step="0.01"
-                            min="1"
-                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-shadow"
-                        />
+                <div className="grid grid-cols-2 gap-4">
+                     <div>
+                        <label htmlFor="currency" className="block text-sm font-medium text-gray-600 mb-1">Currency</label>
+                        <select
+                            id="currency"
+                            value={currency}
+                            onChange={(e) => setCurrency(e.target.value as Currency)}
+                            className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-green-500 focus:border-green-500 transition-shadow bg-white text-sm"
+                        >
+                            <option value="ZAR">Rand (R)</option>
+                            <option value="USD">Dollar ($)</option>
+                        </select>
                     </div>
-                )}
+
+                    {currency === 'USD' && (
+                        <div className="transition-all duration-300 ease-in-out">
+                            <label htmlFor="exchangeRate" className="block text-sm font-medium text-gray-600 mb-1">USD to ZAR Rate</label>
+                            <input
+                                type="number"
+                                id="exchangeRate"
+                                value={exchangeRate}
+                                onChange={(e) => setExchangeRate(Number(e.target.value))}
+                                step="0.01"
+                                min="1"
+                                className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-green-500 focus:border-green-500 transition-shadow text-sm"
+                            />
+                        </div>
+                    )}
+                </div>
                 
-                <div className="border-t pt-6 space-y-4">
-                     <h3 className="text-lg font-semibold text-gray-600">Quick Adjustments</h3>
+                <div className="border-t pt-4 space-y-3">
+                     <h3 className="text-base font-semibold text-gray-700">Quick Adjustments</h3>
                      {broilerData && (
-                         <div className="grid grid-cols-2 gap-4">
+                         <div className="grid grid-cols-2 gap-3">
                              <div>
-                                 <label htmlFor="broilerCost" className="block text-xs font-medium text-gray-600">Broiler Cost ({broilerData.unit})</label>
-                                 <input type="number" id="broilerCost" value={broilerData.costUnit} onChange={(e) => onUpdateFarmUnitValues('Broilers', { costUnit: Number(e.target.value) })} className="w-full p-2 border border-gray-300 rounded-md mt-1" />
+                                 <label htmlFor="broilerCost" className="block text-xs font-medium text-gray-500">🐔 Broiler Cost</label>
+                                 <input type="number" id="broilerCost" value={broilerData.costUnit} onChange={(e) => onUpdateFarmUnitValues('Broilers', { costUnit: Number(e.target.value) })} className="w-full p-2 border border-gray-300 rounded-md mt-1 text-sm" />
                              </div>
                               <div>
-                                 <label htmlFor="broilerPrice" className="block text-xs font-medium text-gray-600">Broiler Price ({broilerData.unit})</label>
-                                 <input type="number" id="broilerPrice" value={broilerData.revUnit} onChange={(e) => onUpdateFarmUnitValues('Broilers', { revUnit: Number(e.target.value) })} className="w-full p-2 border border-gray-300 rounded-md mt-1" />
+                                 <label htmlFor="broilerPrice" className="block text-xs font-medium text-gray-500">🐔 Broiler Price</label>
+                                 <input type="number" id="broilerPrice" value={broilerData.revUnit} onChange={(e) => onUpdateFarmUnitValues('Broilers', { revUnit: Number(e.target.value) })} className="w-full p-2 border border-gray-300 rounded-md mt-1 text-sm" />
                              </div>
                          </div>
                      )}
                      {rabbitData && (
-                         <div className="grid grid-cols-2 gap-4">
+                         <div className="grid grid-cols-2 gap-3">
                              <div>
-                                 <label htmlFor="rabbitCost" className="block text-xs font-medium text-gray-600">Rabbit Cost ({rabbitData.unit})</label>
-                                 <input type="number" id="rabbitCost" value={rabbitData.costUnit} onChange={(e) => onUpdateFarmUnitValues('Rabbit', { costUnit: Number(e.target.value) })} className="w-full p-2 border border-gray-300 rounded-md mt-1" />
+                                 <label htmlFor="rabbitCost" className="block text-xs font-medium text-gray-500">🐰 Rabbit Cost</label>
+                                 <input type="number" id="rabbitCost" value={rabbitData.costUnit} onChange={(e) => onUpdateFarmUnitValues('Rabbit', { costUnit: Number(e.target.value) })} className="w-full p-2 border border-gray-300 rounded-md mt-1 text-sm" />
                              </div>
                               <div>
-                                 <label htmlFor="rabbitPrice" className="block text-xs font-medium text-gray-600">Rabbit Price ({rabbitData.unit})</label>
-                                 <input type="number" id="rabbitPrice" value={rabbitData.revUnit} onChange={(e) => onUpdateFarmUnitValues('Rabbit', { revUnit: Number(e.target.value) })} className="w-full p-2 border border-gray-300 rounded-md mt-1" />
+                                 <label htmlFor="rabbitPrice" className="block text-xs font-medium text-gray-500">🐰 Rabbit Price</label>
+                                 <input type="number" id="rabbitPrice" value={rabbitData.revUnit} onChange={(e) => onUpdateFarmUnitValues('Rabbit', { revUnit: Number(e.target.value) })} className="w-full p-2 border border-gray-300 rounded-md mt-1 text-sm" />
                              </div>
                          </div>
                      )}
@@ -108,9 +110,8 @@ const ConfigurationPanel: React.FC<ConfigurationPanelProps> = ({
                  <InfoBox
                     title="Currency Conversion"
                     variant="warning"
-                    icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" /></svg>}
                 >
-                    <p>All costs and revenues are based in ZAR. When USD is selected, values are divided by the exchange rate you provide.</p>
+                    <p>All values are based in ZAR. When USD is selected, they are converted using your exchange rate.</p>
                 </InfoBox>
             </div>
         </div>

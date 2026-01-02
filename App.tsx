@@ -56,6 +56,7 @@ const App: React.FC = () => {
 
             return {
                 name: farm.name,
+                emoji: farm.emoji,
                 area,
                 quantity,
                 cost,
@@ -73,30 +74,27 @@ const App: React.FC = () => {
             revenue: totalRevenue,
             profit: totalProfit,
             profitMargin,
-            area: totalArea, // Use totalArea from state for the final total, not summed allocatedArea
+            area: totalArea,
         };
 
         return { results: calculatedResults, totals: calculatedTotals };
-    }, [totalArea, farmTypes]);
+    }, [totalArea, farmTypes, currency, exchangeRate]);
 
 
     return (
-        <div className="bg-gradient-to-br from-green-50 to-green-100 min-h-screen text-gray-800 p-4 sm:p-6 lg:p-8">
+        <div className="bg-green-50/50 min-h-screen text-gray-800 p-4 font-sans">
             <div className="max-w-7xl mx-auto">
-                <header className="text-center mb-8 md:mb-12">
-                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-green-800 flex items-center justify-center gap-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 sm:h-10 sm:w-10" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V5a1 1 0 00-1.447-.894l-4 2A1 1 0 0011 7v10zM4 17a1 1 0 001.447.894l4-2A1 1 0 0010 15V5a1 1 0 00-1.447-.894l-4 2A1 1 0 004 7v10z" />
-                        </svg>
-                        Farm Profitability Calculator
+                <header className="text-center mb-8">
+                    <h1 className="text-4xl font-bold text-green-800">
+                        🚜 Farm Profitability Calculator
                     </h1>
-                    <p className="text-green-700 mt-2 text-base sm:text-lg max-w-2xl mx-auto">
-                        Estimate annual revenue, cost, and profit by farm type — with live USD/ZAR conversion.
+                    <p className="text-green-600 mt-1">
+                        Instantly analyze costs, revenue, and profit for your farm.
                     </p>
                 </header>
 
-                <main className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-                    <div className="lg:col-span-1">
+                <main className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                    <div className="lg:col-span-2">
                         <ConfigurationPanel
                             totalArea={totalArea}
                             setTotalArea={setTotalArea}
@@ -108,7 +106,7 @@ const App: React.FC = () => {
                             onUpdateFarmUnitValues={handleUpdateFarmUnitValues}
                         />
                     </div>
-                    <div className="lg:col-span-2">
+                    <div className="lg:col-span-3">
                         <ResultsPanel
                             farmTypes={farmTypes}
                             onUpdateFarmType={handleUpdateFarmType}
@@ -119,8 +117,8 @@ const App: React.FC = () => {
                     </div>
                 </main>
 
-                <footer className="text-center mt-8 md:mt-12 text-green-600">
-                    <p>Farm Profitability Calculator | South African Market Estimates</p>
+                <footer className="text-center mt-8 text-sm text-green-700/80">
+                    <p>South African Market Estimates</p>
                 </footer>
             </div>
         </div>

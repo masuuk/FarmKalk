@@ -1,6 +1,7 @@
 
 export interface FarmType {
   name: string;
+  emoji: string;
   pct: number;
   costUnit: number;
   revUnit: number;
@@ -11,6 +12,7 @@ export interface FarmType {
 
 export interface CalculationResult {
   name: string;
+  emoji: string;
   area: number;
   quantity: number;
   cost: number;
