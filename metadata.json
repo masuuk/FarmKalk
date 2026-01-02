@@ -1,0 +1,5 @@
+{
+  "name": "Farm Profitability Calculator",
+  "description": "A modern web application to calculate and analyze farm profitability based on various farm types, area, and currency conversions. It provides a detailed breakdown of costs, revenue, and profit.",
+  "requestFramePermissions": []
+}
