@@ -23,7 +23,7 @@ const ConfigurationPanel: React.FC<ConfigurationPanelProps> = ({
     const [isInfoBoxVisible, setIsInfoBoxVisible] = useState(true);
 
     return (
-        <div className="bg-white p-5 rounded-xl shadow-lg h-full border border-gray-200/80">
+        <div className="bg-white p-3 sm:p-5 rounded-xl shadow-lg h-full border border-gray-200/80">
             <h2 className="text-lg font-bold text-green-700 pb-3 mb-4 flex items-center gap-2 border-b border-gray-200">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0L7.86 5.89c-.33.13-.69.13-1.02 0l-2.79-1.52c-1.47-.8-3.14.26-2.87 1.95l.59 3.65c.09.55-.13 1.12-.52 1.52L.3 14.89c-1.21 1.21.26 3.23 1.95 2.87l3.65-.59c.55-.09 1.12.13 1.52.52l2.34 2.96c1.13 1.43 3.29 1.43 4.42 0l2.34-2.96c.4-.39.97-.61 1.52-.52l3.65.59c1.69.36 3.16-1.66 1.95-2.87L15.3 11.9c-.39-.4-.61-.97-.52-1.52l.59-3.65c.27-1.69-1.4-2.75-2.87-1.95l-2.79 1.52c-.33.13-.69.13-1.02 0l-.65-2.72zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />

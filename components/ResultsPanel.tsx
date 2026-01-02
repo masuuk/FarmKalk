@@ -23,7 +23,7 @@ const ResultsPanel: React.FC<{
     const cycleInfoItems = farmTypes.filter(f => f.name !== 'Utilities & road');
 
     return (
-        <div className="bg-white/80 p-5 rounded-xl shadow-lg h-full border border-gray-200/80 backdrop-blur-sm">
+        <div className="bg-white/80 p-3 sm:p-5 rounded-xl shadow-lg h-full border border-gray-200/80 backdrop-blur-sm">
             <div className="flex justify-between items-center pb-3 mb-4 border-b border-gray-200">
                 <h2 className="text-lg font-bold text-green-700 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
