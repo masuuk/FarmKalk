@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Currency } from '../types';
 import InfoBox from './InfoBox';
@@ -36,7 +35,7 @@ const ConfigurationPanel: React.FC<ConfigurationPanelProps> = ({
                         <label htmlFor="totalArea" className="block text-sm font-bold text-gray-600 mb-1">Total Farm Area</label>
                         <div className="relative">
                             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                <span className="text-red-600 text-sm">m²</span>
+                                <span className="text-gray-500 text-sm">m²</span>
                             </div>
                             <input
                                 type="number"
@@ -44,7 +43,7 @@ const ConfigurationPanel: React.FC<ConfigurationPanelProps> = ({
                                 value={totalArea}
                                 onChange={(e) => setTotalArea(Number(e.target.value))}
                                 min="100"
-                                className="w-full p-2 pl-9 border border-gray-300 rounded-md focus:ring-1 focus:ring-green-500 focus:border-green-500 transition-shadow text-sm text-red-600 font-bold"
+                                className="w-full p-2 pl-9 border border-gray-300 rounded-md focus:ring-1 focus:ring-green-500 focus:border-green-500 transition-shadow text-sm text-gray-900 bg-white font-bold"
                             />
                         </div>
                     </div>
@@ -54,7 +53,7 @@ const ConfigurationPanel: React.FC<ConfigurationPanelProps> = ({
                             id="currency"
                             value={currency}
                             onChange={(e) => setCurrency(e.target.value as Currency)}
-                            className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-green-500 focus:border-green-500 transition-shadow bg-white text-sm text-red-600 font-bold"
+                            className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-green-500 focus:border-green-500 transition-shadow bg-white text-sm text-gray-900 font-bold"
                         >
                             <option value="ZAR">🇿🇦 Rand (R)</option>
                             <option value="USD">🇺🇸 Dollar ($)</option>
@@ -76,7 +75,7 @@ const ConfigurationPanel: React.FC<ConfigurationPanelProps> = ({
                                 onChange={(e) => setExchangeRate(Number(e.target.value))}
                                 step="0.01"
                                 min="1"
-                                className="w-full p-2 pl-11 border border-gray-300 rounded-md focus:ring-1 focus:ring-green-500 focus:border-green-500 transition-shadow text-sm font-bold"
+                                className="w-full p-2 pl-11 border border-gray-300 rounded-md focus:ring-1 focus:ring-green-500 focus:border-green-500 transition-shadow text-sm text-gray-900 font-bold"
                             />
                         </div>
                     </div>

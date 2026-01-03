@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { FarmType } from '../types';
 
@@ -59,7 +58,7 @@ const EditModal: React.FC<EditModalProps> = ({ farm, onSave, onClose }) => {
                             id="costUnit"
                             value={costUnit}
                             onChange={(e) => setCostUnit(Number(e.target.value))}
-                            className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-green-500 focus:border-green-500 text-sm font-bold"
+                            className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-green-500 focus:border-green-500 text-sm text-gray-900 font-bold"
                             autoFocus
                         />
                     </div>
@@ -70,7 +69,7 @@ const EditModal: React.FC<EditModalProps> = ({ farm, onSave, onClose }) => {
                             id="revUnit"
                             value={revUnit}
                             onChange={(e) => setRevUnit(Number(e.target.value))}
-                            className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-green-500 focus:border-green-500 text-sm font-bold"
+                            className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-green-500 focus:border-green-500 text-sm text-gray-900 font-bold"
                         />
                     </div>
                 </div>
