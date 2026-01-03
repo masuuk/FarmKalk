@@ -31,7 +31,7 @@ const ProfitChart: React.FC<ProfitChartProps> = ({ results, formatCurrency }) =>
 
     return (
         <div className="bg-white/50 p-4 rounded-lg border border-gray-200/80 shadow-sm">
-             <h4 className="text-sm font-semibold text-gray-600 mb-3 text-center">Best 8 Performers</h4>
+             <h4 className="text-sm font-bold text-gray-600 mb-3 text-center">Best 8 Performers</h4>
             <div className="w-full h-48 flex items-end justify-around gap-2 px-2">
                 {top8Farms.map((item) => {
                     const barHeight = maxProfit > 0 ? (item.profit / maxProfit) * 100 : 0;
@@ -48,7 +48,7 @@ const ProfitChart: React.FC<ProfitChartProps> = ({ results, formatCurrency }) =>
                                 style={{ height: `${barHeight}%` }}
                                 title={`${item.name}: ${formatCurrency(item.profit)}`}
                             >
-                               <div className="absolute bottom-full mb-1 w-max max-w-xs left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                               <div className="absolute bottom-full mb-1 w-max max-w-xs left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none font-bold">
                                     {formatCurrency(item.profit)}
                                 </div>
                             </div>

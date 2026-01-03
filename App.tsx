@@ -74,7 +74,7 @@ const App: React.FC = () => {
 
 
     return (
-        <div className="bg-green-50/50 min-h-screen text-gray-800 p-2 sm:p-4 font-sans">
+        <div className="bg-green-50/50 min-h-screen text-gray-800 p-2 sm:p-4 font-sans font-bold">
             <div className="max-w-7xl mx-auto">
                 <header className="text-center mb-6 sm:mb-8 p-4 sm:p-6 bg-green-700 rounded-xl shadow-md">
                     <h1 className="text-3xl sm:text-4xl font-bold text-white">

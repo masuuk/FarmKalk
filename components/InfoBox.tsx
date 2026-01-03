@@ -30,7 +30,7 @@ const InfoBox: React.FC<InfoBoxProps> = ({ title, children, variant, onClose }) 
 
     return (
         <div className={`p-3 rounded-lg mt-4 text-xs ${currentVariant.bg} ${currentVariant.text} relative`} role="alert">
-            <h3 className={`font-semibold mb-1 flex items-center gap-1.5 ${currentVariant.icon ? '' : 'justify-center'}`}>
+            <h3 className={`font-bold mb-1 flex items-center gap-1.5 ${currentVariant.icon ? '' : 'justify-center'}`}>
                 {currentVariant.icon}
                 {title}
             </h3>

@@ -26,7 +26,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ results, totals, formatCurr
             {/* Desktop Table View */}
             <div className="hidden md:block overflow-x-auto rounded-lg shadow-md border border-gray-200/80 bg-white">
                 <table className="w-full min-w-[650px] text-sm text-left text-gray-700">
-                    <thead className="bg-gray-50 text-gray-500 uppercase text-xs font-semibold">
+                    <thead className="bg-gray-50 text-gray-500 uppercase text-xs font-bold">
                         <tr>
                             <th scope="col" className="px-4 py-3">Farm Type</th>
                             <th scope="col" className="px-4 py-3 text-center">Area (m²)</th>
@@ -42,7 +42,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ results, totals, formatCurr
                             if (item.name === "Utilities & road") return null;
                             return (
                                 <tr key={item.name} className="hover:bg-green-50/30 transition-colors duration-200">
-                                    <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
+                                    <td className="px-4 py-3 font-bold text-gray-900 whitespace-nowrap">
                                         <span className="mr-2">{item.emoji}</span>{item.name}
                                     </td>
                                     <td className="px-4 py-3 text-center">{item.area.toLocaleString(undefined, { maximumFractionDigits: 0 })}</td>
@@ -103,19 +103,19 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ results, totals, formatCurr
                             <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm border-t pt-2 mt-2">
                                 <div>
                                     <p className="text-gray-500 text-xs">Area</p>
-                                    <p className="font-medium">{item.area.toLocaleString(undefined, { maximumFractionDigits: 0 })} m²</p>
+                                    <p className="font-bold">{item.area.toLocaleString(undefined, { maximumFractionDigits: 0 })} m²</p>
                                 </div>
                                  <div>
                                     <p className="text-gray-500 text-xs">Quantity</p>
-                                    <p className="font-medium">{item.quantity > 0 ? `${item.quantity.toLocaleString()} ${item.unit}` : '—'}</p>
+                                    <p className="font-bold">{item.quantity > 0 ? `${item.quantity.toLocaleString()} ${item.unit}` : '—'}</p>
                                 </div>
                                  <div>
                                     <p className="text-gray-500 text-xs">Cost</p>
-                                    <p className="font-medium">{formatCurrency(item.cost)}</p>
+                                    <p className="font-bold">{formatCurrency(item.cost)}</p>
                                 </div>
                                  <div>
                                     <p className="text-gray-500 text-xs">Revenue</p>
-                                    <p className="font-medium">{formatCurrency(item.revenue)}</p>
+                                    <p className="font-bold">{formatCurrency(item.revenue)}</p>
                                 </div>
                                  <div className="col-span-2 bg-green-50 p-2 rounded-md mt-1">
                                     <p className="text-green-600 text-xs">Profit</p>
@@ -133,15 +133,15 @@ const ResultsTable: React.FC<ResultsTableProps> = ({ results, totals, formatCurr
                     <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm border-t border-green-200/80 pt-2">
                         <div>
                             <p className="text-green-700 text-xs">Total Area</p>
-                            <p className="font-medium text-green-900">{totals.area.toLocaleString()} m²</p>
+                            <p className="font-bold text-green-900">{totals.area.toLocaleString()} m²</p>
                         </div>
                         <div>
                             <p className="text-green-700 text-xs">Total Cost</p>
-                            <p className="font-medium text-green-900">{formatCurrency(totals.cost)}</p>
+                            <p className="font-bold text-green-900">{formatCurrency(totals.cost)}</p>
                         </div>
                         <div>
                             <p className="text-green-700 text-xs">Total Revenue</p>
-                            <p className="font-medium text-green-900">{formatCurrency(totals.revenue)}</p>
+                            <p className="font-bold text-green-900">{formatCurrency(totals.revenue)}</p>
                         </div>
                          <div className="font-bold">
                             <p className="text-green-700 text-xs">Total Profit</p>

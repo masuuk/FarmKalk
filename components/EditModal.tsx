@@ -53,33 +53,33 @@ const EditModal: React.FC<EditModalProps> = ({ farm, onSave, onClose }) => {
 
                 <div className="space-y-4">
                     <div>
-                        <label htmlFor="costUnit" className="block text-sm font-medium text-gray-700 mb-1">Cost per Unit ({farm.unit})</label>
+                        <label htmlFor="costUnit" className="block text-sm font-bold text-gray-700 mb-1">Cost per Unit ({farm.unit})</label>
                         <input
                             type="number"
                             id="costUnit"
                             value={costUnit}
                             onChange={(e) => setCostUnit(Number(e.target.value))}
-                            className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-green-500 focus:border-green-500 text-sm"
+                            className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-green-500 focus:border-green-500 text-sm font-bold"
                             autoFocus
                         />
                     </div>
                     <div>
-                        <label htmlFor="revUnit" className="block text-sm font-medium text-gray-700 mb-1">Selling Price per Unit ({farm.unit})</label>
+                        <label htmlFor="revUnit" className="block text-sm font-bold text-gray-700 mb-1">Selling Price per Unit ({farm.unit})</label>
                         <input
                             type="number"
                             id="revUnit"
                             value={revUnit}
                             onChange={(e) => setRevUnit(Number(e.target.value))}
-                            className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-green-500 focus:border-green-500 text-sm"
+                            className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-green-500 focus:border-green-500 text-sm font-bold"
                         />
                     </div>
                 </div>
 
                 <div className="flex justify-end items-center mt-6 pt-4 border-t border-gray-200">
-                    <button onClick={onClose} className="text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-md mr-2 transition-colors font-semibold">
+                    <button onClick={onClose} className="text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-md mr-2 transition-colors font-bold">
                         Cancel
                     </button>
-                    <button onClick={handleSave} className="text-sm text-white bg-green-600 hover:bg-green-700 px-4 py-2 rounded-md transition-colors font-semibold">
+                    <button onClick={handleSave} className="text-sm text-white bg-green-600 hover:bg-green-700 px-4 py-2 rounded-md transition-colors font-bold">
                         Save Changes
                     </button>
                 </div>

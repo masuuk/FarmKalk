@@ -16,7 +16,7 @@ const StatCard: React.FC<StatCardProps> = ({ label, value, icon, isHighlighted =
             </div>
             <div>
                  <p className="text-xs text-gray-500">{label}</p>
-                 <p className={`text-lg font-semibold ${isHighlighted ? 'text-green-700' : 'text-gray-800'}`}>
+                 <p className={`text-lg font-bold ${isHighlighted ? 'text-green-700' : 'text-gray-800'}`}>
                     {value}
                 </p>
             </div>

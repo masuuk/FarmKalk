@@ -72,7 +72,7 @@ const ResultsPanel: React.FC<{
                     {cycleInfoItems.map(farm => (
                         <div key={farm.name} className="flex items-center gap-1.5" title={`${farm.name}: ${farm.cycles} cycles`}>
                             <span className="text-base">{farm.emoji}</span>
-                            <span className="font-semibold text-xs bg-green-200/60 text-green-900 px-1.5 py-0.5 rounded-full">
+                            <span className="font-bold text-xs bg-green-200/60 text-green-900 px-1.5 py-0.5 rounded-full">
                                 {farm.cycles}
                             </span>
                         </div>
