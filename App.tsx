@@ -78,7 +78,7 @@ const App: React.FC = () => {
             <div className="max-w-7xl mx-auto">
                 <header className="text-center mb-6 sm:mb-8 p-4 sm:p-6 bg-green-700 rounded-xl shadow-md">
                     <h1 className="text-3xl sm:text-4xl font-bold text-white">
-                        🚜 Farm Profitability Calculator
+                        🚜 Farm Performance Application
                     </h1>
                     <p className="text-green-200 mt-1 text-sm sm:text-base">
                         Instantly analyze costs, revenue, and profit for your farm.
@@ -108,7 +108,7 @@ const App: React.FC = () => {
                 </main>
 
                 <footer className="text-center mt-8 text-sm text-green-700/80">
-                    <p>South African Market Estimates</p>
+                    <p>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; SOLENGWE PBC &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</p>
                 </footer>
             </div>
         </div>

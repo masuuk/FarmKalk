@@ -8,15 +8,20 @@ interface ProfitChartProps {
 }
 
 const ProfitChart: React.FC<ProfitChartProps> = ({ results, formatCurrency }) => {
-    const profitableFarms = results.filter(r => r.profit > 0 && r.name !== "Utilities & road");
-    const maxProfit = Math.max(...profitableFarms.map(r => r.profit), 0);
-
-    // Sort farms by profit to identify tallest and shortest bars
-    const sortedFarms = [...profitableFarms].sort((a, b) => b.profit - a.profit);
-    const tallestNames = new Set(sortedFarms.slice(0, 3).map(f => f.name));
-    const shortestNames = new Set(sortedFarms.slice(-3).map(f => f.name));
+    // First, filter out non-profitable and utility entries
+    const allProfitableFarms = results.filter(r => r.profit > 0 && r.name !== "Utilities & road");
     
-    if (maxProfit === 0) {
+    // Determine the absolute max profit for correct scaling, even if it's not in the top 8
+    const maxProfit = Math.max(...allProfitableFarms.map(r => r.profit), 0);
+
+    // Sort by profit and take the top 8 for visualization
+    const top8Farms = [...allProfitableFarms]
+        .sort((a, b) => b.profit - a.profit)
+        .slice(0, 8);
+        
+    const topPerformerName = top8Farms.length > 0 ? top8Farms[0].name : null;
+    
+    if (top8Farms.length === 0) {
         return (
             <div className="text-center p-4 bg-gray-50 rounded-lg text-gray-500 text-sm">
                 No profit data to display.
@@ -26,17 +31,15 @@ const ProfitChart: React.FC<ProfitChartProps> = ({ results, formatCurrency }) =>
 
     return (
         <div className="bg-white/50 p-4 rounded-lg border border-gray-200/80 shadow-sm">
-             <h4 className="text-sm font-semibold text-gray-600 mb-3 text-center">Profit Contribution</h4>
+             <h4 className="text-sm font-semibold text-gray-600 mb-3 text-center">Top 8 Profit Contributors</h4>
             <div className="w-full h-48 flex items-end justify-around gap-2 px-2">
-                {profitableFarms.map((item) => {
-                    const barHeight = (item.profit / maxProfit) * 100;
+                {top8Farms.map((item) => {
+                    const barHeight = maxProfit > 0 ? (item.profit / maxProfit) * 100 : 0;
                     
-                    let barColorClasses = "bg-green-200 hover:bg-green-400"; // Default
-                    if (tallestNames.has(item.name)) {
-                        barColorClasses = "bg-yellow-400 hover:bg-yellow-500"; // Gold for tallest
-                    } else if (shortestNames.has(item.name)) {
-                        barColorClasses = "bg-red-300 hover:bg-red-400"; // Red for shortest
-                    }
+                    const isTopPerformer = item.name === topPerformerName;
+                    const barColorClasses = isTopPerformer
+                        ? "bg-yellow-400 hover:bg-yellow-500" // Gold for the best
+                        : "bg-green-200 hover:bg-green-400"; // Green for others
 
                     return (
                         <div key={item.name} className="flex-1 flex flex-col items-center h-full justify-end group">

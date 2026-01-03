@@ -20,8 +20,8 @@ const InfoBox: React.FC<InfoBoxProps> = ({ title, children, variant, onClose }) 
             )
         },
         info: {
-            bg: "bg-blue-100/50",
-            text: "text-blue-800",
+            bg: "bg-green-100/50",
+            text: "text-green-800",
             icon: null
         },
     };
