@@ -31,7 +31,7 @@ const ProfitChart: React.FC<ProfitChartProps> = ({ results, formatCurrency }) =>
 
     return (
         <div className="bg-white/50 p-4 rounded-lg border border-gray-200/80 shadow-sm">
-             <h4 className="text-sm font-semibold text-gray-600 mb-3 text-center">Top 8 Profit Contributors</h4>
+             <h4 className="text-sm font-semibold text-gray-600 mb-3 text-center">Best 8 Performers</h4>
             <div className="w-full h-48 flex items-end justify-around gap-2 px-2">
                 {top8Farms.map((item) => {
                     const barHeight = maxProfit > 0 ? (item.profit / maxProfit) * 100 : 0;
