@@ -1,0 +1,21 @@
+# app.yaml
+# Configuration for Google App Engine
+
+# Specifies the runtime environment. nodejs20 is a modern choice
+# that works well for serving environments.
+runtime: nodejs20
+
+# The handlers section directs App Engine how to route incoming requests.
+handlers:
+  # This handler serves static files like CSS, JS, images, etc.
+  # It matches any URL that looks like a file path with an extension.
+  - url: /(.*\..+)$
+    static_files: dist/\1
+    upload: dist/(.*\..+)$
+
+  # This is the catch-all handler for a Single Page Application (SPA).
+  # It serves the main index.html file for any request that doesn't match a static file above.
+  # This allows client-side routing (e.g., React Router) to work correctly.
+  - url: /.*
+    static_files: dist/index.html
+    upload: dist/index.html
