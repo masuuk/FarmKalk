@@ -8,7 +8,9 @@ interface EditModalProps {
 }
 
 const EditModal: React.FC<EditModalProps> = ({ farm, onSave, onClose }) => {
-    const [costUnit, setCostUnit] = useState(farm.costUnit);
+    const [materialCostUnit, setMaterialCostUnit] = useState(farm.materialCostUnit);
+    const [labourCostUnit, setLabourCostUnit] = useState(farm.labourCostUnit);
+    const [overheadCostUnit, setOverheadCostUnit] = useState(farm.overheadCostUnit);
     const [revUnit, setRevUnit] = useState(farm.revUnit);
 
     useEffect(() => {
@@ -26,10 +28,14 @@ const EditModal: React.FC<EditModalProps> = ({ farm, onSave, onClose }) => {
     const handleSave = () => {
         onSave({
             ...farm,
-            costUnit: Number(costUnit) || 0,
+            materialCostUnit: Number(materialCostUnit) || 0,
+            labourCostUnit: Number(labourCostUnit) || 0,
+            overheadCostUnit: Number(overheadCostUnit) || 0,
             revUnit: Number(revUnit) || 0,
         });
     };
+    
+    const totalCost = (Number(materialCostUnit) || 0) + (Number(labourCostUnit) || 0) + (Number(overheadCostUnit) || 0);
 
     return (
         <div 
@@ -52,17 +58,6 @@ const EditModal: React.FC<EditModalProps> = ({ farm, onSave, onClose }) => {
 
                 <div className="space-y-4">
                     <div>
-                        <label htmlFor="costUnit" className="block text-sm font-bold text-gray-700 mb-1">Cost per Unit ({farm.unit})</label>
-                        <input
-                            type="number"
-                            id="costUnit"
-                            value={costUnit}
-                            onChange={(e) => setCostUnit(Number(e.target.value))}
-                            className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-green-500 focus:border-green-500 text-sm text-gray-900 font-bold"
-                            autoFocus
-                        />
-                    </div>
-                    <div>
                         <label htmlFor="revUnit" className="block text-sm font-bold text-gray-700 mb-1">Selling Price per Unit ({farm.unit})</label>
                         <input
                             type="number"
@@ -70,7 +65,47 @@ const EditModal: React.FC<EditModalProps> = ({ farm, onSave, onClose }) => {
                             value={revUnit}
                             onChange={(e) => setRevUnit(Number(e.target.value))}
                             className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-green-500 focus:border-green-500 text-sm text-gray-900 font-bold"
+                            autoFocus
                         />
+                    </div>
+                    
+                    <div className="pt-2 border-t">
+                        <p className="text-sm font-bold text-gray-700 mb-2">Cost Breakdown per Unit</p>
+                         <div className="space-y-3 pl-2 border-l-2 border-green-200">
+                             <div>
+                                <label htmlFor="materialCostUnit" className="block text-xs font-bold text-gray-600 mb-1">Material Cost</label>
+                                <input
+                                    type="number"
+                                    id="materialCostUnit"
+                                    value={materialCostUnit}
+                                    onChange={(e) => setMaterialCostUnit(Number(e.target.value))}
+                                    className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-green-500 focus:border-green-500 text-sm text-gray-900 font-bold"
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="labourCostUnit" className="block text-xs font-bold text-gray-600 mb-1">Labour Cost</label>
+                                <input
+                                    type="number"
+                                    id="labourCostUnit"
+                                    value={labourCostUnit}
+                                    onChange={(e) => setLabourCostUnit(Number(e.target.value))}
+                                    className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-green-500 focus:border-green-500 text-sm text-gray-900 font-bold"
+                                />
+                            </div>
+                             <div>
+                                <label htmlFor="overheadCostUnit" className="block text-xs font-bold text-gray-600 mb-1">Overhead Cost</label>
+                                <input
+                                    type="number"
+                                    id="overheadCostUnit"
+                                    value={overheadCostUnit}
+                                    onChange={(e) => setOverheadCostUnit(Number(e.target.value))}
+                                    className="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-green-500 focus:border-green-500 text-sm text-gray-900 font-bold"
+                                />
+                            </div>
+                        </div>
+                        <div className="mt-3 text-right pr-1">
+                            <p className="text-xs text-gray-500">Total Cost per Unit: <span className="font-bold text-gray-800">{totalCost.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span></p>
+                        </div>
                     </div>
                 </div>
 

@@ -39,7 +39,7 @@ const App: React.FC = () => {
             totalAllocatedArea += area;
             const quantity = farm.name !== "Utilities & road" ? Math.round(farm.yield * area * farm.cycles) : 0;
             
-            const cost = quantity * farm.costUnit;
+            const cost = quantity * (farm.materialCostUnit + farm.labourCostUnit + farm.overheadCostUnit);
             const revenue = quantity * farm.revUnit;
             const profit = revenue - cost;
 

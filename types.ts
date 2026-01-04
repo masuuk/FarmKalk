@@ -1,9 +1,10 @@
-
 export interface FarmType {
   name: string;
   emoji: string;
   pct: number;
-  costUnit: number;
+  materialCostUnit: number;
+  labourCostUnit: number;
+  overheadCostUnit: number;
   revUnit: number;
   unit: string;
   cycles: number;
